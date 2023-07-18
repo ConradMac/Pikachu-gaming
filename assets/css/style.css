@@ -1,0 +1,47 @@
+.main-page {
+    display: flex;
+    justify-content: center;
+}
+
+select {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#category-name {
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: red;
+}
+
+#underscore-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.space {
+    width: 2rem;
+    /* background-color: red; */
+}
+
+.section-title__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: royalblue;
+    font-size: 1.5rem;
+}
+
+.section-title__content__text {
+    color: royalblue;
+    font-size: 1.5rem;
+    width: 50%;
+}
