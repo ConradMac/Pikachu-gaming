@@ -7,17 +7,13 @@ import {
 } from "./data.js";
 import { names } from "./utilities.js";
 
-// //! Création de la du tableau de données des pokemons, trainers, ennemies et locations.
+// //! Création des variables et des constantes
 const underscoreContainer = document.getElementById("underscore-container");
 let spans = [];
-
 let correctLetters = [];
 let wrongLetters = [];
 let lifeCount = 6;
 const livesElement = document.querySelector("#lives");
-
-console.log(locationData.length);
-
 const selectElement = document.getElementById("category-select");
 
 const category = {
@@ -28,16 +24,9 @@ const category = {
     pokemon: pokemonData,
 };
 
-//!parcours tout mon tableau des clés de l'objet category et créer les options du menu déroulant
-Object.keys(category).forEach((key) => {
-    const option = document.createElement("option");
-    option.value = key;
-    // check freecodecamp pour la reponse.
-    option.text = key.charAt(0).toUpperCase() + key.slice(1);
-    selectElement.appendChild(option);
-});
+console.log(locationData.length);
 
-//! Création de la div section
+//! 1 - Création de la fonction qui s'occupera de la section title
 function sectionTitle() {
     const div = document.createElement("div");
     div.className = "section-title__content";
@@ -57,7 +46,7 @@ function sectionTitle() {
 }
 console.log(sectionTitle());
 
-//! To select a category et show the category selected with a sentence. function
+//! 2 - Création de la fonction qui s'occupera de la section category
 function onCategorySelected() {
     const selectedCategory = selectElement.value;
     console.log("Catégorie sélectionnée :", selectedCategory);
@@ -93,8 +82,7 @@ function onCategorySelected() {
     livesElement.textContent = `Lives: ${lifeCount} / 6`;
 }
 
-selectElement.addEventListener("change", onCategorySelected);
-
+//! 3 - Création de la fonction qui s'occupera de la section underscore
 function generateUnderscore(word) {
     spans = [];
     for (let index = 0; index < word.length; index++) {
@@ -138,4 +126,15 @@ function generateUnderscore(word) {
     });
 }
 
-const categoryName = document.getElementById("category-name");
+//! 4 - Création de la fonction qui s'occupera de la section wrong-letters
+Object.keys(category).forEach((key) => {
+    const option = document.createElement("option");
+    option.value = key;
+    // check freecodecamp pour la reponse.
+    option.text = key.charAt(0).toUpperCase() + key.slice(1);
+    selectElement.appendChild(option);
+});
+
+selectElement.addEventListener("change", onCategorySelected);
+
+// const categoryName = document.getElementById("category-name");
