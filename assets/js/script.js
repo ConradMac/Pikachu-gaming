@@ -4,6 +4,7 @@ import {
     trainerData,
     enemyData,
     defaultData,
+    alphabet,
 } from "./data.js";
 import { names } from "./utilities.js";
 
@@ -30,15 +31,8 @@ console.log(locationData.length);
 function sectionTitle() {
     const div = document.createElement("div");
     div.className = "section-title__content";
-    // div.style.display = "flex";
-    // div.style.justifyContent = "center";
-    // div.width = "100%";
     let p = document.createElement("p");
     p.className = "section-title__content__text";
-    // p.style.color = "royalBlue";
-    // p.style.fontSize = "1.5rem";
-    // p.style.width = "50%";
-
     p.textContent =
         "Please, before going further, select a category and let see if you are a true Pokemon Master. Do not forget, if you lose, you will be punished by Pikachu.";
     div.appendChild(p);
@@ -48,6 +42,10 @@ console.log(sectionTitle());
 
 //! 2 - Création de la fonction qui s'occupera de la section category
 function onCategorySelected() {
+    underscoreContainer.innerHTML = "";
+    document.getElementById("wrong-letters").innerHTML = "";
+    document.getElementById("correct-letters").innerHTML = "";
+
     const selectedCategory = selectElement.value;
     console.log("Catégorie sélectionnée :", selectedCategory);
 
@@ -93,9 +91,11 @@ function displayWrongLetters() {
 
 // Créer une fonction pour afficher les lettres correctes
 
-// function displayCorrectLetters() {
-//     correctLettersElement.innerHTML = correctLetters.join(" ");
-// }
+function displayCorrectLetters() {
+    document.getElementById("correct-letters").innerHTML =
+        correctLetters.join(" ");
+}
+
 function generateUnderscore(word) {
     spans = [];
     for (let index = 0; index < word.length; index++) {
@@ -109,44 +109,77 @@ function generateUnderscore(word) {
         spans.push(span);
     }
 
-    /***/
-
-    /** */
-
     document.addEventListener("keydown", (event) => {
+        event.preventDefault();
         console.log(event.key, livesElement);
+
+        if (!alphabet.includes(event.key)) {
+            return;
+        }
+        // event inclu dans array. -> key (const) includes.
         // let currentLives = lifeCount;
         const keyPressed = event.key.toLowerCase();
 
         for (let index = 0; index < word.length; index++) {
             if (word[index].toLowerCase() === keyPressed) {
+                console.log(
+                    "======================>>>>>     ",
+                    keyPressed,
+                    word[index].toLowerCase()
+                );
                 spans[index].textContent = keyPressed;
             }
         }
-        if (word.includes(keyPressed) && !correctLetters.includes(keyPressed)) {
+
+        // On reappuie sur une lettre deja validee
+        const letterIsCorrect = word.includes(keyPressed);
+        if (correctLetters.includes(keyPressed)) {
+            losePoints();
+            return;
+        }
+        if (!letterIsCorrect && !wrongLetters.includes(keyPressed)) {
+            wrongLetters.push(keyPressed);
+            losePoints(); // debugger;
+            return;
+        }
+
+        if (letterIsCorrect && !correctLetters.includes(keyPressed)) {
             correctLetters.push(keyPressed);
 
             if (!spans.some((span) => span.textContent === "_")) {
                 alert("You wone..... great");
-                // debugger;
             }
-        } else if (!wrongLetters.includes(keyPressed)) {
+        } else if (
+            !wrongLetters.includes(keyPressed) &&
+            !correctLetters.includes(keyPressed)
+        ) {
             wrongLetters.push(keyPressed);
-            lifeCount--;
-            // debugger;
-
-            if (lifeCount === 0) {
-                alert("Pikachu is angry, dear !!! ");
-            }
+            losePoints(); // debugger;
+            return;
+        }
+        if (!letterIsCorrect) {
+            losePoints();
+            return;
         }
 
         livesElement.textContent = `Lives: ${lifeCount} / 6`;
 
         displayWrongLetters();
-        // displayCorrectLetters();
+        displayCorrectLetters();
     });
 }
 
+function losePoints() {
+    lifeCount--;
+    livesElement.textContent = `Lives: ${lifeCount} / 6`;
+    displayWrongLetters();
+    displayCorrectLetters();
+
+    if (lifeCount === 0) {
+        alert("Pikachu is angry, dear !!! ");
+        // showModal();
+    }
+}
 //!parcours tout mon tableau des clés de l'objet category et créer les options du menu déroulant
 Object.keys(category).forEach((key) => {
     const option = document.createElement("option");
@@ -162,3 +195,42 @@ selectElement.addEventListener("change", onCategorySelected);
 
 wrongLetters = [];
 correctLetters = [];
+
+// button reset
+
+// Add an event listener to the reset button
+const resetButton = document.getElementById("reset-button");
+resetButton.addEventListener("click", resetGame);
+
+// Function to reset the game
+function resetGame() {
+    // Clear the underscore container
+    underscoreContainer.innerHTML = "";
+
+    // Clear the letters containers
+    document.getElementById("wrong-letters").innerHTML = "";
+    document.getElementById("correct-letters").innerHTML = "";
+
+    // Reset the letters arrays
+    correctLetters = [];
+    wrongLetters = [];
+
+    // clear the lives container check check
+    livesElement.textContent = "";
+    // Reset the life count
+    lifeCount = 6;
+    livesElement.textContent = `Lives: ${lifeCount} / 6`;
+
+    // Call the onCategorySelected function to reset the game category
+    onCategorySelected();
+
+    // Event listener for the reset button
+    const resetButton = document.getElementById("reset-button");
+    resetButton.addEventListener("click", resetGame);
+
+    // Event listener for category selection
+    selectElement.addEventListener("change", onCategorySelected);
+}
+
+// TODO : creer un modal des que Pikachu is DeAd.
+function showModal() {}

@@ -269,7 +269,7 @@ export const locationData = [
     // ...and so on, you can add more location objects here
 ];
 
-const alphabet = [
+export const alphabet = [
     "a",
     "b",
     "c",
@@ -290,8 +290,11 @@ const alphabet = [
     "r",
     "s",
     "t",
+    "u",
     "v",
     "w",
+    "x",
     "y",
     "z",
 ];
+// lendroit ou faire la verif pour savoir ou quand je type une touche, --> quelle fonction.
