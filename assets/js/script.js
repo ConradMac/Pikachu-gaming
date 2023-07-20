@@ -34,7 +34,7 @@ function sectionTitle() {
     let p = document.createElement("p");
     p.className = "section-title__content__text";
     p.textContent =
-        "Please, before going further, select a category and let see if you are a true Pokemon Master. Do not forget, if you lose, you will be punished by Pikachu.";
+        "Please, before going further, select a category and let see if you are a true Pokemon Master. Do not forget, if you lose, you would have MURDERED Pikachu.";
     div.appendChild(p);
     document.getElementById("title-page").appendChild(div);
 }
@@ -234,3 +234,25 @@ function resetGame() {
 
 // TODO : creer un modal des que Pikachu is DeAd.
 function showModal() {}
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     const pikachu = document.querySelector(".pikachu");
+//     const loadingText = document.querySelector(".loading-text");
+
+//     pikachu.style.display = "none";
+
+//     setTimeout(() => {
+//         pikachu.style.display = "block";
+//         loadingText.textContent = "Pikachu is ready!";
+//     }, 3000); // Replace 3000 with the desired loading time in milliseconds
+// });
+
+// script.js
+document.addEventListener("DOMContentLoaded", function () {
+    // Le chargement de la page est terminé, masquez le chargement
+    const loading = document.querySelector(".loading");
+    loading.style.display = "none";
+
+    // Affichez la page maintenant qu'elle est chargée
+    document.body.style.display = "block";
+});
