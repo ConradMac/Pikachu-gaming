@@ -1,13 +1,30 @@
-body {
+body,
+html {
     margin: 0;
     padding: 0;
-    background-image: url("/images/thumb-1920-273289.jpg");
-    background-size: cover;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom, #f08b0f, yellow);
+    min-height: 100vh;
+    /* padding-top: 1rem; */
+}
+
+.image-full {
+    margin: 0;
+    padding: 0;
+    background-image: url(/images/pikapika.png);
+    background-size: 500px auto;
     background-repeat: no-repeat;
-    background-position: bottom;
-    background-attachment: fixed;
-    /* width: 100%;
-    height: 100%; */
+    background-position: left bottom;
+}
+
+h2 {
+    margin: 0;
 }
 
 /* .page-content {
@@ -35,7 +52,7 @@ span {
 #reset-button {
     position: absolute;
     top: 90%;
-    left: 50%;
+    left: 90%;
     /* transform: translate (-50%, -50%); */
     transform: translate(-45%, -45%);
     background-color: #ffc702;
@@ -50,7 +67,7 @@ span {
 .main-page {
     display: flex;
     justify-content: center;
-    margin-top: 2%;
+    /* margin-top: 2%; */
 }
 
 select {
@@ -123,4 +140,43 @@ select {
     font-size: 20px;
     color: #333;
     font-weight: bold;
+}
+
+#wins {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 9%;
+}
+
+@media screen and (max-width: 1498px) {
+    .image-full {
+        background-size: 400px auto;
+    }
+}
+
+@media screen and (max-width: 1198px) {
+    .image-full {
+        background-size: 300px auto;
+    }
+    .section-title__content .section-title__content__text {
+        font-size: 24px;
+    }
+}
+
+@media (width < 898px) {
+    .image-full {
+        background-size: 200px auto;
+        background-position: 50% 75%;
+    }
+    .section-title__content {
+        line-height: 5;
+    }
+
+    .marks-Errors {
+        align-items: center;
+        /* font-size: 10px; */
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
 }

@@ -21,40 +21,49 @@
             />
             <div class="loading-text">Loading...</div>
         </div>
-        <div class="page-content">
-            <!-- Ajout de la div pour contenir le contenu de la page -->
-            <div class="main-page">
-                <select id="category-select"></select>
-            </div>
-            <section id="title-page"></section>
-            <div id="category-name"></div>
-            <div class="score-name">
-                <div id="lives"></div>
-                <section id="underscore-container"></section>
-            </div>
-            <div id="success"></div>
-            <section class="toto">
-                <div id="score-page" class="marks-Errors"></div>
-                <!-- Ajout des divs pour les lettres correctes et incorrectes -->
-                <div class="marks-Errors">
-                    <h2>Wrong Letters:</h2>
-                    <div id="wrong-letters">
-                        <li class="letter-to-display"></li>
+        <div class="image-full">
+            <div class="page-content">
+                <!-- Ajout de la div pour contenir le contenu de la page -->
+                <div class="main-page">
+                    <select id="category-select"></select>
+                </div>
+                <section id="title-page"></section>
+                <div id="category-name"></div>
+                <section class="toto">
+                    <div class="score-name">
+                        <div id="lives"></div>
+                        <section id="underscore-container"></section>
                     </div>
-                </div>
-                <div class="marks-Errors">
-                    <h2>Correct Letters:</h2>
-                    <div id="correct-letters"></div>
-                </div>
-            </section>
+                    <div id="success"></div>
+                    <div id="wins"></div>
 
-            <button id="reset-button">Reset Game</button>
-        </div>
+                    <div id="score-page" class="marks-Errors"></div>
+                    <!-- Ajout des divs pour les lettres correctes et incorrectes -->
+                    <div class="marks-Errors">
+                        <h2>Wrong Letters:</h2>
+                        <div id="wrong-letters">
+                            <li class="letter-to-display"></li>
+                        </div>
+                    </div>
+                    <div class="marks-Errors">
+                        <h2>Correct Letters:</h2>
+                        <div id="correct-letters"></div>
+                    </div>
+                </section>
 
-        <div class="modal" id="custom-modal">
-            <div class="modal-content">
-                <img src="./images/pikachu-pendu.png" alt="Votre image" />
+                <button id="reset-button">Reset Game</button>
             </div>
+
+            <!-- <div class="modal" id="custom-modal">
+                <div class="modal-content">
+                    <img src="./images/pikachu-pendu.png" alt="Votre image" />
+                </div>
+            </div> -->
+            <!-- <audio controls>
+               
+                <source src="PikachuSongPikaPiPokémon.mp3" type="audio/mpeg" />
+                Votre navigateur ne prend pas en charge l'élément audio.
+            </audio> -->
         </div>
     </body>
 </html>

@@ -298,3 +298,27 @@ export const alphabet = [
     "z",
 ];
 // lendroit ou faire la verif pour savoir ou quand je type une touche, --> quelle fonction.
+
+/**
+if (correctLetters.includes(keyPressed) || wrongLetters.includes(keyPressed)) {
+    // Letter has already been typed, do nothing
+    // lose point
+    return;
+}
+
+if (!letterIsCorrect && !correctLetters.includes(keyPressed)) {
+    // If the letter is incorrect, add it to wrongLetters and lose points
+    wrongLetters.push(keyPressed);
+    losePoints();
+    console.log("wrong letter");
+} else {
+    // If the letter is correct, add it to correctLetters
+    correctLetters.push(keyPressed);
+    console.log("correct letter");
+    console.log(correctLetters);
+}
+ if (correctLetters.includes(keyPressed)) {
+        //     losePoints();
+        //     return;
+        // }
+ */

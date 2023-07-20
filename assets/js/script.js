@@ -14,6 +14,9 @@ let spans = [];
 let correctLetters = [];
 let wrongLetters = [];
 let lifeCount = 6;
+let wordToGuess = "";
+let wins = 0;
+const winsElement = document.getElementById("wins");
 const livesElement = document.querySelector("#lives");
 const selectElement = document.getElementById("category-select");
 
@@ -51,7 +54,7 @@ function onCategorySelected() {
 
     const categoryName = document.getElementById("category-name");
 
-    if (selectedCategory === "ChooseCategory") {
+    if (selectedCategory === "Choose a Category") {
         categoryName.innerHTML = "Please select a category";
     } else {
         categoryName.innerHTML = "The Chosen Category Is " + selectedCategory;
@@ -62,12 +65,12 @@ function onCategorySelected() {
     // let lives = 6;
     console.log(selectedNames);
 
-    const myWord =
+    wordToGuess =
         selectedNames[
             Math.floor(Math.random() * selectedNames.length)
         ].toLowerCase();
-    console.log(myWord);
-    generateUnderscore(myWord);
+    console.log(wordToGuess);
+    generateUnderscore(wordToGuess);
     correctLetters = [];
     wrongLetters = [];
     // lives = 6;
@@ -108,65 +111,6 @@ function generateUnderscore(word) {
         underscoreContainer.append(span);
         spans.push(span);
     }
-
-    document.addEventListener("keydown", (event) => {
-        event.preventDefault();
-        console.log(event.key, livesElement);
-
-        if (!alphabet.includes(event.key)) {
-            return;
-        }
-        // event inclu dans array. -> key (const) includes.
-        // let currentLives = lifeCount;
-        const keyPressed = event.key.toLowerCase();
-
-        for (let index = 0; index < word.length; index++) {
-            if (word[index].toLowerCase() === keyPressed) {
-                console.log(
-                    "======================>>>>>     ",
-                    keyPressed,
-                    word[index].toLowerCase()
-                );
-                spans[index].textContent = keyPressed;
-            }
-        }
-
-        // On reappuie sur une lettre deja validee
-        const letterIsCorrect = word.includes(keyPressed);
-        if (correctLetters.includes(keyPressed)) {
-            losePoints();
-            return;
-        }
-        if (!letterIsCorrect && !wrongLetters.includes(keyPressed)) {
-            wrongLetters.push(keyPressed);
-            losePoints(); // debugger;
-            return;
-        }
-
-        if (letterIsCorrect && !correctLetters.includes(keyPressed)) {
-            correctLetters.push(keyPressed);
-
-            if (!spans.some((span) => span.textContent === "_")) {
-                alert("You wone..... great");
-            }
-        } else if (
-            !wrongLetters.includes(keyPressed) &&
-            !correctLetters.includes(keyPressed)
-        ) {
-            wrongLetters.push(keyPressed);
-            losePoints(); // debugger;
-            return;
-        }
-        if (!letterIsCorrect) {
-            losePoints();
-            return;
-        }
-
-        livesElement.textContent = `Lives: ${lifeCount} / 6`;
-
-        displayWrongLetters();
-        displayCorrectLetters();
-    });
 }
 
 function losePoints() {
@@ -176,7 +120,7 @@ function losePoints() {
     displayCorrectLetters();
 
     if (lifeCount === 0) {
-        alert("Pikachu is angry, dear !!! ");
+        alert("Pikachu is DEAD, dear !!! ");
         // showModal();
     }
 }
@@ -225,15 +169,15 @@ function resetGame() {
     onCategorySelected();
 
     // Event listener for the reset button
-    const resetButton = document.getElementById("reset-button");
-    resetButton.addEventListener("click", resetGame);
+    // const resetButton = document.getElementById("reset-button");
+    // resetButton.addEventListener("click", resetGame);
 
-    // Event listener for category selection
-    selectElement.addEventListener("change", onCategorySelected);
+    // // Event listener for category selection
+    // selectElement.addEventListener("change", onCategorySelected);
 }
 
 // TODO : creer un modal des que Pikachu is DeAd.
-function showModal() {}
+// function showModal() {}
 
 // document.addEventListener("DOMContentLoaded", function () {
 //     const pikachu = document.querySelector(".pikachu");
@@ -246,8 +190,111 @@ function showModal() {}
 //         loadingText.textContent = "Pikachu is ready!";
 //     }, 3000); // Replace 3000 with the desired loading time in milliseconds
 // });
+function scoreHangman() {
+    wins++;
 
+    winsElement.textContent = `Wins: ${wins}`;
+}
 // script.js
+document.addEventListener("keydown", (event) => {
+    event.preventDefault();
+    // console.log(event.key, livesElement);
+
+    if (!alphabet.includes(event.key)) {
+        return;
+    }
+    // event inclu dans array. -> key (const) includes.
+    // let currentLives = lifeCount;
+    const keyPressed = event.key.toLowerCase();
+    console.log(keyPressed);
+
+    for (let index = 0; index < wordToGuess.length; index++) {
+        if (wordToGuess[index].toLowerCase() === keyPressed) {
+            console.log(
+                "======================>>>>>     ",
+                keyPressed,
+                wordToGuess[index].toLowerCase()
+            );
+            spans[index].textContent = keyPressed;
+        }
+    }
+
+    // On reappuie sur une lettre deja validee
+    const letterIsCorrect = wordToGuess.includes(keyPressed);
+    // if (correctLetters.includes(keyPressed)) {
+    //     losePoints();
+    //     return;
+    // }
+
+    // // i lose a point if I type a wrong letter
+    // if (!letterIsCorrect && !wrongLetters.includes(keyPressed)) {
+    //     wrongLetters.push(keyPressed);
+    //     losePoints();
+    //     // debugger;
+    //     console.log("wrong letter");
+    //     return;
+    // }
+    // // If I type a letter is correct , and if it is a correct letter, I push it in the correctLetters array
+    // if (letterIsCorrect && !correctLetters.includes(keyPressed)) {
+    //     correctLetters.push(keyPressed);
+    //     console.log("correct letter");
+    //     console.log(correctLetters);
+
+    //     // if (!spans.some((span) => span.textContent === "_")) {
+    //     //     alert("You wone..... great");
+    //     // }
+    // } else if (
+    //     !wrongLetters.includes(keyPressed) &&
+    //     !correctLetters.includes(keyPressed)
+    // ) {
+    //     wrongLetters.push(keyPressed);
+    //     losePoints();
+    //     // debugger;
+    //     return;
+    // }
+
+    // if (correctLetters.includes(keyPressed)) {
+    //     losePoints();
+    //     return;
+    // }
+    if (
+        correctLetters.includes(keyPressed) ||
+        wrongLetters.includes(keyPressed)
+    ) {
+        // Letter has already been typed, do nothing
+        // lose point
+        losePoints();
+        return;
+    }
+
+    if (!letterIsCorrect && !correctLetters.includes(keyPressed)) {
+        // If the letter is incorrect, add it to wrongLetters and lose points
+        wrongLetters.push(keyPressed);
+
+        losePoints();
+        console.log("wrong letter");
+    } else {
+        // If the letter is correct, add it to correctLetters
+        correctLetters.push(keyPressed);
+        console.log("correct letter");
+        console.log(correctLetters);
+
+        // If all letters have been found, alert the user
+        if (!spans.some((span) => span.textContent === "_")) {
+            alert("You wone..... great");
+            // Increment the score
+            // Update the score display
+            scoreHangman();
+        }
+    }
+
+    livesElement.textContent = `Lives: ${lifeCount} / 6`;
+
+    displayWrongLetters();
+    displayCorrectLetters();
+});
+
+// scoreHangman();
 document.addEventListener("DOMContentLoaded", function () {
     // Le chargement de la page est terminé, masquez le chargement
     const loading = document.querySelector(".loading");
@@ -256,3 +303,17 @@ document.addEventListener("DOMContentLoaded", function () {
     // Affichez la page maintenant qu'elle est chargée
     document.body.style.display = "block";
 });
+
+// afficher le score des que toutes les lettres sont trouvees
+
+// let wins = 0;
+// const winsElement = document.querySelector("#wins");
+// let toto = !spans.some((span) => span.textContent === "_");
+// function scoreHangman() {
+//     if (toto) {
+//         wins++;
+//         winsElement = wins;
+//     }
+
+//     console.log(wins);
+// }
