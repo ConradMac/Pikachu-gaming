@@ -19,6 +19,9 @@ let wins = 0;
 const winsElement = document.getElementById("wins");
 const livesElement = document.querySelector("#lives");
 const selectElement = document.getElementById("category-select");
+const pikachuSound = document.getElementById("pikachu");
+const stopButton = document.getElementById("stopGameButton");
+const volumeInput = document.getElementById("volume");
 
 const category = {
     ChooseCategory: defaultData,
@@ -28,7 +31,27 @@ const category = {
     pokemon: pokemonData,
 };
 
+volumeInput.addEventListener("change", (event) => {
+    console.log(event);
+    pikachuSound.volume = event.target.value;
+});
+
 console.log(locationData.length);
+
+const startGameButton = document.getElementById("startGameButton");
+
+startGameButton.addEventListener("click", () => {
+    pikachuSound.play();
+    pikachuSound.loop = true;
+});
+
+stopButton.addEventListener("click", () => {
+    pikachuSound.pause();
+});
+
+// window.addEventListener("beforeunload", () => {
+//     playstationSound.pause();
+// });
 
 //! 1 - Création de la fonction qui s'occupera de la section title
 function sectionTitle() {

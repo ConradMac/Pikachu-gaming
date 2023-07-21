@@ -14,6 +14,10 @@ body {
     /* padding-top: 1rem; */
 }
 
+.hidden {
+    display: none;
+}
+
 .image-full {
     margin: 0;
     padding: 0;
