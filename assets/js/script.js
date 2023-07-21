@@ -284,7 +284,7 @@ document.addEventListener("keydown", (event) => {
             alert("You wone..... great");
             // Increment the score
             // Update the score display
-            scoreHangman();
+            scoreHangman(); // appelle de la fonction pour obtenir les wins
         }
     }
 
